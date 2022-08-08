@@ -1,0 +1,102 @@
+﻿<Window x:Class="SystemBiliards.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SystemBiliards"
+        xmlns:viewmodels="clr-namespace:SystemBiliards.ViewModels" 
+        d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowVM}"
+        mc:Ignorable="d"
+        Title="Учет билиярд" Height="650" Width="1000">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Border Background="#0092cc">
+            <TabControl BorderThickness="0,0,0,1">
+                <TabItem Header="Билиярд" Width="120"
+                         FontSize="16" Height="27" Cursor="Hand"
+                         Style="{DynamicResource Tab_Item}" >
+                        <StackPanel Orientation="Horizontal">
+
+                            <Button Command="{Binding SaveServiceCommand2,UpdateSourceTrigger=PropertyChanged}" Width="70" Margin="2" BorderThickness="0" Background="#F1F1F1">
+                                <StackPanel>
+                                    <Image Height="30" Source="../Image/add-user.png"/>
+                                    <TextBlock FontSize="12" Text="Добвить"/>
+                                </StackPanel>
+                            </Button>
+                            <Button Width="70" Margin="2" BorderThickness="0" Background="#F1F1F1">
+                                <StackPanel>
+                                    <Image Height="30" Source="../Image/save.png"/>
+                                    <TextBlock FontSize="12" Text="Добвить"/>
+                                </StackPanel>
+                            </Button>
+                            <Button Width="70" Margin="2" BorderThickness="0" Background="#F1F1F1">
+                                <StackPanel>
+                                    <Image Height="30" Source="../Image/report.png"/>
+                                    <TextBlock  FontSize="12" Text="Добвить"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+
+                    </TabItem>
+                    <TabItem Header="Кафе бар" Width="120"
+                         FontSize="16" Height="27" Cursor="Hand"
+                         Style="{DynamicResource Tab_Item}" >
+                        <Grid>
+
+                        </Grid>
+
+                    </TabItem>
+                    <TabItem Header="Отчеты" Width="120"
+                         FontSize="16" Height="27" Cursor="Hand"
+                         Style="{DynamicResource Tab_Item}" >
+                        <Grid>
+
+                        </Grid>
+
+                    </TabItem>
+
+                </TabControl>
+            </Border>
+        </Grid>
+
+            <ItemsControl Grid.Row="1"
+                x:Name="MyItems"                
+                ItemsSource="{Binding TableList ,UpdateSourceTrigger=PropertyChanged}">
+
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                    <Button  Command="{Binding ElementName=MyItems,  Path=DataContext.CommandShowStartWindow}"
+                            CommandParameter="{Binding Id}"
+                            Margin="10" Cursor="Hand" >
+                        <Grid>
+                            <Image Width="250"  Source="../Image/b1.png" ></Image>
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock FontSize="25" 
+                                       Foreground="White" 
+                                       Text="{Binding TableName}"></TextBlock>
+                                <TextBlock FontSize="25" 
+                                       Foreground="White" 
+                                       Text="{Binding CountTime.Count,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                            </StackPanel>
+
+                        </Grid>
+                    </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+
+            </ItemsControl>
+       
+        
+       
+    </Grid>
+</Window>
